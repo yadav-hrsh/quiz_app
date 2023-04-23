@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
 .container ol li{
     font-size: 1.4em;
     color: #cecece;
@@ -31,4 +35,4 @@
     border: none;
     border-radius: 3px;
     font-size: 1em;
-}
+} */

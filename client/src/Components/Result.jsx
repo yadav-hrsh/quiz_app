@@ -1,6 +1,6 @@
 import React from 'react'
 import Result_table from './Result_table';
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { resetResultAction } from '../redux/Result_reducer'
 import { resetQuestionAction } from '../redux/question_Reducer'
@@ -10,25 +10,29 @@ import {postServerData} from '../helper/helper';
 const Result = () => {
   const answers = useSelector((state)=>state.questions.ans);
   const result = useSelector((state)=>state.result.result);
-  const userid = useSelector((state)=> state.result.userid)
+  const userid = useSelector((state)=> state.User.personal_data.email)
   const attempts = attempts_number(result);
   const marks = marks_count(result,answers)*10;
    
   const status = (marks>=(answers.length*10)/3)?"passed":"failed"
 
-  const send_result = postServerData('http://localhost:8080/api/result',{
+  const send_result = postServerData('/api/result',{
       "username":userid, 
       "result":result,
       "attempts":attempts,
       "points":marks,
       "achived":status
   });
-  console.log(send_result)
+
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const onRestart=()=>{
+    send_result;
     dispatch(resetResultAction());
     dispatch(resetQuestionAction());
+    navigate('/home')
   }
   return (
     <div className="container">
@@ -36,7 +40,7 @@ const Result = () => {
 
         <div className='result flex-center'>
           <div className='flex'>
-            <span>Username</span>
+            <span>Email</span>
             <span className='bold'>{userid}</span>
           </div>
           <div className='flex'>
@@ -62,7 +66,7 @@ const Result = () => {
         </div>
 
         <div className='start'>
-          <Link className='btn' to={'/'} onClick={onRestart}>Restart</Link>
+          <button className='btn' to={'/home'} onClick={()=>{onRestart()}}>Restart</button>
         </div>
 
         <div className='container'>

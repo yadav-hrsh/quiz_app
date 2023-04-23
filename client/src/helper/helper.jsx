@@ -19,6 +19,7 @@ export function marks_count(result,answers){
 
 export const Auth = ({ children })=>{
     const data = useSelector(state=>state.result.userid)
+    console.log(data);
     return (data ? children : <Navigate to={"/"} replace={true}></Navigate>)
 }
 

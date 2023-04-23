@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors';
 import {config} from 'dotenv';
 import connect from './Database/conn.js';
+import cookieParser from 'cookie-parser';
 import router from './router/route.js';
 const app = express();
 app.use(morgan('tiny'));
@@ -12,8 +13,9 @@ config();
 
 const port = process.env.PORT || 8080
 
+app.use(cookieParser())
+app.use(router);
 
-app.use('/api',router);
 app.get('/',(req,res)=>{
     try {
         res.json("get request")

@@ -3,11 +3,15 @@ import { createSlice } from '@reduxjs/toolkit'
 export const questionReducer = createSlice({
     name:'questions',
     initialState:{
+        subject:"",
         queue: [],
         ans:[],
         trace:0
     },
     reducers :{
+        setsubject : (state,action)=>{
+            state.subject = action.payload;
+        },
         startExamAction : (state,action) =>{
             return {
                 ...state,
@@ -18,8 +22,7 @@ export const questionReducer = createSlice({
         moveNextAction:(state)=>{
                 state.trace++; 
         },
-        movePrevAction:(state)=>{
-            
+        movePrevAction:(state)=>{        
             state.trace--;
         },
         resetQuestionAction:()=>{
@@ -32,6 +35,6 @@ export const questionReducer = createSlice({
     },
 })
 
-export const {startExamAction,moveNextAction,movePrevAction,resetQuestionAction} = questionReducer.actions;
+export const {startExamAction,moveNextAction,movePrevAction,resetQuestionAction,setsubject} = questionReducer.actions;
 
 export default questionReducer.reducer;

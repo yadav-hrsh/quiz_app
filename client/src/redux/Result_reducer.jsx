@@ -19,7 +19,6 @@ export const resultReducer = createSlice({
     }, 
     resetResultAction: () => {
       return {
-        userid: null,
         result: [],
       };
     },

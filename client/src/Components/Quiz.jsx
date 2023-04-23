@@ -13,9 +13,9 @@ const [check, setcheck] = useState(undefined);
   const trace = questions.trace
   const dispatch = useDispatch();
 
-  // console.log("questions",questions)
-  // console.log("results",result)
-  // console.log("ans: ",questions.ans)
+  console.log("questions",questions)
+  console.log("results",result)
+  console.log("ans: ",questions.ans)
   const onChecked = (i) => {
     setcheck(i);
   };
